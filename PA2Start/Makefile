@@ -37,7 +37,8 @@ JCC = javac
 JAR = jar
 #-------------------------
 
-all: $(SCANNER).jar $(PROG).jar
+#all: $(SCANNER).jar $(PROG).jar
+all: $(SCANNER).jar
 
 source: $(PARSE_DIR)/Yylex.java $(PARSE_DIR)/mj.java
 
@@ -56,10 +57,10 @@ $(SCANNER).jar: $(SRC_DIR)/$(SCANNER)Driver.class
 	cd ..
 	mv $(SRC_DIR)/$(SCANNER).jar .
 
-$(PROG).jar: $(SRC_DIR)/$(PROG)Driver.class
-	cd $(SRC_DIR); $(JAR) cmf $(PROG)MainClass.txt $(PROG).jar *.class */*.class avrH.rtl.s avrF.rtl.s -C $(JAVA_CUP_RUNTIME) java_cup  
-	cd ..
-	mv $(SRC_DIR)/$(PROG).jar .
+#$(PROG).jar: $(SRC_DIR)/$(PROG)Driver.class
+#	cd $(SRC_DIR); $(JAR) cmf $(PROG)MainClass.txt $(PROG).jar *.class */*.class avrH.rtl.s avrF.rtl.s -C $(JAVA_CUP_RUNTIME) java_cup  
+#	cd ..
+#	mv $(SRC_DIR)/$(PROG).jar .
 
 #### mj parser
 $(PARSE_DIR)/mj.java: $(PARSE_DIR)/mj.cup
@@ -79,9 +80,9 @@ MAINSCANNER_DEPS = $(SRC_DIR)/$(SCANNER)Driver.java  \
 $(SRC_DIR)/$(SCANNER)Driver.class: $(MAINSCANNER_DEPS)
 	$(JCC) -classpath $(JAVA_CUP_RUNTIME):$(SRC_DIR) $(SRC_DIR)/$(SCANNER)Driver.java
 
-MAINPROG_DEPS = $(SRC_DIR)/$(PROG)Driver.java  \
-            $(PARSE_DIR)/Yylex.java $(PARSE_DIR)/mj.java
+#MAINPROG_DEPS = $(SRC_DIR)/$(PROG)Driver.java  \
+#            $(PARSE_DIR)/Yylex.java $(PARSE_DIR)/mj.java
 
-$(SRC_DIR)/$(PROG)Driver.class: $(MAINPROG_DEPS)
-	$(JCC) -classpath $(JAVA_CUP_RUNTIME):$(SRC_DIR) $(SRC_DIR)/$(PROG)Driver.java
+#$(SRC_DIR)/$(PROG)Driver.class: $(MAINPROG_DEPS)
+#	$(JCC) -classpath $(JAVA_CUP_RUNTIME):$(SRC_DIR) $(SRC_DIR)/$(PROG)Driver.java
 
